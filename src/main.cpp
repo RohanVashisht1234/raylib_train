@@ -51,16 +51,21 @@ int main()
                         SeekMusicStream(rl.musics.horn, 0.0f);
                     }
 
-                    if (IsKeyDown(KEY_W) && rl.train_config.protagonist_train_speed < 5.1f)
+                    if (IsKeyDown(KEY_W) && rl.train_config.protagonist_train_speed < SPEED_LIMIT)
                     {
                         rl.train_config.protagonist_train_speed += ACCELERATION;
                     }
-                    else if (rl.train_config.protagonist_train_speed > 0.0f && IsKeyDown(KEY_B))
+                    else if (IsKeyDown(KEY_B))
                     {
+                        if(rl.train_config.protagonist_train_speed > 0) {
+                            rl.train_config.protagonist_train_speed -= BREAK_POWER;
+                        } else {
+                            rl.train_config.protagonist_train_speed += BREAK_POWER;
+                        }
                     }
-                    else if (IsKeyDown(KEY_S))
+                    else if (IsKeyDown(KEY_S) && rl.train_config.protagonist_train_speed > REVERSE_SPEED_LIMIT)
                     {
-                        rl.train_config.protagonist_train_speed -= 0.005f;
+                        rl.train_config.protagonist_train_speed -= DECELERATION;
                     }
 
                     if (rl.cameras.front_camera.position.z > 2000.0f)
@@ -163,7 +168,7 @@ int main()
                     }
 
                     DrawModel(rl.models.train_station, (Vector3){35, 3.4, -9}, 0.3f, GRAY);
-                    DrawModel(rl.models.train_station, (Vector3){35, 3.4, 1990}, 0.3f, GRAY);
+                    DrawModel(rl.models.train_station, (Vector3){35, 3.4, 1970}, 0.3f, GRAY);
 
                     if (rl.rules.stop_at_next_station)
                     {

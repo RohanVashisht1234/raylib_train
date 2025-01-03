@@ -12,4 +12,9 @@
 #define SPEED_LIMIT 5.1f
 #define ACCELERATION 0.005f
 
+#define REVERSE_SPEED_LIMIT -5.1f
+#define DECELERATION 0.005f
+
+#define BREAK_POWER 0.01f
+
 #define INTERVALS_FOR_STOPS 2
